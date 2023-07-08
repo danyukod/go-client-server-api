@@ -1,4 +1,4 @@
-module github.com/danyukod/go-client-server-api
+module github.com/danyukod/go-client-server-api/server
 
 go 1.20
 

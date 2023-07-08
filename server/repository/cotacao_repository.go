@@ -2,7 +2,7 @@ package repository
 
 import (
 	"database/sql"
-	"github.com/danyukod/go-client-server-api/src/server/model"
+	"github.com/danyukod/go-client-server-api/server/model"
 )
 
 type CotacaoRepository interface {

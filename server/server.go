@@ -1,15 +1,26 @@
-package server
+package main
 
 import (
 	"context"
 	"database/sql"
 	"encoding/json"
-	"github.com/danyukod/go-client-server-api/src/server/model"
-	"github.com/danyukod/go-client-server-api/src/server/repository"
+	"github.com/danyukod/go-client-server-api/server/model"
+	"github.com/danyukod/go-client-server-api/server/repository"
 	_ "github.com/mattn/go-sqlite3"
+	"log"
 	"net/http"
 	"time"
 )
+
+func main() {
+
+	err := Serve()
+	if err != nil {
+		log.Println("Error: ", err)
+		return
+	}
+
+}
 
 func Serve() error {
 	http.HandleFunc("/cotacao", handler)
@@ -25,7 +36,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	defer cancel()
 	select {
 	case <-ctx.Done():
-		println("client canceled the request")
+		log.Println("client canceled the request")
 	default:
 		cotacaoUsecase(w, ctx)
 	}
@@ -67,7 +78,7 @@ func cotacaoUsecase(w http.ResponseWriter, ctx context.Context) {
 }
 
 func createSqliteDatabase(err error) *sql.DB {
-	db, err := sql.Open("sqlite3", "./cotacao.db")
+	db, err := sql.Open("sqlite3", "cotacao.db")
 	if err != nil {
 		panic(err)
 	}
