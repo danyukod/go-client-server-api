@@ -62,7 +62,7 @@ func cotacaoUsecase(w http.ResponseWriter, ctx context.Context) {
 	db := createSqliteDatabase(err)
 	defer db.Close()
 
-	repo := repository.NewCotacaoRepository(db)
+	repo := repository.NewCotacaoRepository(db, ctx)
 
 	err = repo.Save(usdbrl.USDBRL)
 	if err != nil {
