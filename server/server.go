@@ -32,7 +32,7 @@ func Serve() error {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	ctx, cancel := context.WithTimeout(r.Context(), 200*time.Millisecond)
+	ctx, cancel := context.WithTimeout(r.Context(), 1000*time.Millisecond)
 	defer cancel()
 	select {
 	case <-ctx.Done():
@@ -71,7 +71,7 @@ func cotacaoUsecase(w http.ResponseWriter, ctx context.Context) {
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	err = json.NewEncoder(w).Encode(usdbrl.USDBRL)
+	err = json.NewEncoder(w).Encode(usdbrl.USDBRL.Bid)
 	if err != nil {
 		panic(err)
 	}
