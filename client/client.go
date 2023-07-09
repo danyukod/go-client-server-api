@@ -28,7 +28,7 @@ func main() {
 	var usdbrl string
 	err = json.NewDecoder(res.Body).Decode(&usdbrl)
 
-	fileName := "cotacao.txt"
+	fileName := "client/cotacao.txt"
 
 	f, err := os.Create(fileName)
 	if err != nil {
